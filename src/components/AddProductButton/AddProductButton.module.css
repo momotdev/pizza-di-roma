@@ -1,0 +1,24 @@
+.addbtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 75px;
+    height: 75px;
+    line-height: 60px;
+    border-radius: 50%;
+    background: #08be08;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 80px;
+    color: #ffffff;
+    user-select: none;
+    cursor: pointer;
+    transition: transform .5s;
+    box-shadow: 2px 2px 2px #00000030;
+}
+
+.addbtn:hover {
+    transform: scale(1.1);
+    transition: transform .5s;
+}

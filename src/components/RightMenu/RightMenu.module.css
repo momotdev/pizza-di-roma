@@ -1,0 +1,28 @@
+.menu {
+    min-width: 300px;
+    display: flex;
+    box-shadow: 1px 10px 20px #00000030;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding-top: 40px;
+}
+
+.menu-item {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 15px 0 15px 50px;
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    background: rgba(0, 68, 102, .1);
+}
+
+.icon {
+
+}
+
+.label {
+    margin-left: 10px;
+}

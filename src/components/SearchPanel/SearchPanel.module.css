@@ -1,0 +1,9 @@
+.search-panel {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+.label {
+    font-weight: 700;
+}

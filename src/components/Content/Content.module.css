@@ -1,0 +1,7 @@
+.content {
+    background: rgba(0, 68, 102, .1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}

@@ -1,0 +1,39 @@
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px;
+    padding: 10px;
+    border: 2px solid #08be08;
+    border-radius: 10px;
+    background: white;
+    width: 300px;
+    height: 100px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 4px 4px 5px #00000030;
+}
+
+.product-item:hover {
+    box-shadow: 4px 4px 20px #00000040;
+}
+
+.info-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.picture {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.price {
+    font-weight: 300;
+}
