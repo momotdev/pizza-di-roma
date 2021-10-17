@@ -12,7 +12,7 @@ const Header = () => {
 	const logout = async () => {
 		await PizzaService.logout(localStorage.getItem('authRefreshToken'))
 			.then(response => {
-				setAuth({...auth, authToken: ''});
+				setAuth({...auth, authToken: '', authRefreshToken: ''});
 				localStorage.removeItem('authToken');
 				localStorage.removeItem('authRefreshToken');
 			})

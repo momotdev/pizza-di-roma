@@ -17,16 +17,10 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 		"price": "",
 		"active": false
 	});
-	const [selectedImage, setSelectedImage] = useState('');
 	const imageForm = React.createRef();
 
 	const fetchProduct = async (id) => {
 		return await PizzaService.getProduct(id);
-	}
-
-	const sendImageForm = async () => {
-		const formData = new FormData(imageForm.current);
-		return await PizzaService.sendImage(formData);
 	}
 
 	const sendProduct = async (product) => {
@@ -38,7 +32,6 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 	}
 
 	const selectTypeValueHandler = (value) => {
-		console.log("change in product")
 		setProduct({...product, type: value});
 	}
 
@@ -51,15 +44,19 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 		}
 	}, [productId]);
 
-	useEffect(() => {
+	const sendImageForm = async (form) => {
+		const formData = new FormData(form.current);
+		return await PizzaService.sendImage(formData);
+	}
+
+	const handleImageChange = () => {
 		if (imageForm.current != null && imageForm.current.image.value) {
-			sendImageForm()
+			sendImageForm(imageForm)
 				.then(response => {
-					console.log(response);
-					setProduct({...product, imageId: response.id, imageUrl: response.url});
+					setProduct((state) => ({...state, imageId: response.id, imageUrl: response.url}));
 				})
 		}
-	}, [selectedImage]);
+	}
 
 	return (
 		<div className={classes.profile}>
@@ -107,9 +104,9 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 				</div>
 			</form>
 			<div className={classes['image-form']}>
-				<img src={product.imageUrl} alt="" width={300} height={300} className={classes['profile-image']}/>
+				<img src={product.imageUrl} alt={product.name} width={300} height={300} className={classes['profile-image']}/>
 				<form ref={imageForm}>
-					<input onChange={(e) => setSelectedImage(e.target.value)} type="file" name="image"
+					<input onChange={() => handleImageChange()} type="file" name="image"
 						   id="productImage"/>
 				</form>
 			</div>

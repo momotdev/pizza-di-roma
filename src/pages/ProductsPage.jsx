@@ -19,7 +19,6 @@ const ProductsPage = () => {
 	useEffect(() => {
 		fetchProducts()
 			.then(response => {
-				console.log(response);
 				setProducts(response);
 				setSortedProducts(response);
 			});

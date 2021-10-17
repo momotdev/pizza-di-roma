@@ -8,7 +8,7 @@ const ProductItem = ({product, ...props}) => {
 				<div className={classes.name}>{product.name}</div>
 				<div className={classes.price}>{product.price} грн.</div>
 			</div>
-			<img src={`${product.imageUrl}&size=SMALL`} className={classes.picture}/>
+			<img src={`${product.imageUrl}&size=SMALL`} alt={product.name} className={classes.picture}/>
 		</div>
 	);
 };

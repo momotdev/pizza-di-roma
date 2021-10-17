@@ -8,13 +8,13 @@ import {useEffect, useState} from "react";
 function App() {
 	const [auth, setAuth] = useState({
 		authToken: '',
-		refreshToken: '',
+		authRefreshToken: '',
 	})
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		if (localStorage.getItem('authToken')) {
-			setAuth((state) => ({...state, authToken: true}));
+			setAuth((state) => ({...state, authToken: localStorage.getItem('authToken'), authRefreshToken: localStorage.getItem('authRefreshToken')}));
 		}
 		setIsLoading(false);
 	}, [])

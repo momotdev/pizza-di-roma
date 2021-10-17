@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from './LoginForm.module.css';
 import DefaultButton from "../UI/DefaultButton/DefaultButton";
 import PizzaService from "../../API/PizzaService";

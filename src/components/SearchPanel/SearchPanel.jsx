@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import classes from './SearchPanel.module.css';
 import DefaultButton from "../UI/DefaultButton/DefaultButton";
 
 const SearchPanel = ({sortProducts}) => {
-
 	const [search, setSearch] = useState({
 		type: [],
 		enabled: []
 	})
+
 
 	const toggleSearchArrayValue = (array, value) => {
 		let resultArray = [];
@@ -17,12 +17,11 @@ const SearchPanel = ({sortProducts}) => {
 			resultArray = search[array];
 			resultArray.push(value);
 		}
+
+		sortProducts(Object.assign({}, search, {[array]: resultArray}))
 		setSearch(Object.assign({}, search, {[array]: resultArray}));
 	}
 
-	useEffect(() => {
-		sortProducts(search);
-	}, [search])
 
 	return (
 		<div className={classes['search-panel']}>
@@ -33,16 +32,18 @@ const SearchPanel = ({sortProducts}) => {
 					onClick={() => toggleSearchArrayValue('type', 'PIZZA')}>PIZZA</DefaultButton>
 				<DefaultButton
 					active={search.type.some((item) => item === 'SUSHI')}
-					onClick={() => toggleSearchArrayValue('type','SUSHI')}>SUSHI</DefaultButton>
+					onClick={() => toggleSearchArrayValue('type', 'SUSHI')}>SUSHI</DefaultButton>
 				<DefaultButton
 					active={search.type.some((item) => item === 'OTHER')}
-					onClick={() => toggleSearchArrayValue('type','OTHER')}>OTHER</DefaultButton>
+					onClick={() => toggleSearchArrayValue('type', 'OTHER')}>OTHER</DefaultButton>
 			</div>
 
 			<div>
 				<span className={classes.label}>Enabled: </span>
-				<DefaultButton active={search.enabled.some((item) => item === true)} onClick={() => toggleSearchArrayValue('enabled',true)}>ENABLED</DefaultButton>
-				<DefaultButton active={search.enabled.some((item) => item === false)} onClick={() => toggleSearchArrayValue('enabled',false)}>DISABLED</DefaultButton>
+				<DefaultButton active={search.enabled.some((item) => item === true)}
+							   onClick={() => toggleSearchArrayValue('enabled', true)}>ENABLED</DefaultButton>
+				<DefaultButton active={search.enabled.some((item) => item === false)}
+							   onClick={() => toggleSearchArrayValue('enabled', false)}>DISABLED</DefaultButton>
 			</div>
 		</div>
 	);

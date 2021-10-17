@@ -1,5 +1,4 @@
 import jwtDecode from "jwt-decode";
-
 const BASE_URL = 'https://api.kronst.dev/pizza-di-roma';
 
 export default class PizzaService {
@@ -65,23 +64,6 @@ export default class PizzaService {
 		}
 	}
 
-	static async refreshToken(refreshToken) {
-		const data = {refreshToken: refreshToken};
-		const response = await fetch(`${BASE_URL}/api/v1/auth/refresh`, {
-			method: 'POST',
-			headers: {
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(data)
-		})
-
-		if (response.status === 200) {
-			return response.json();
-		} else {
-			console.error(`Nakrilo pizdoi, kapitan: ${response.status}`)
-		}
-	}
-
 	static async logout(refreshToken) {
 		const data = {refreshToken: refreshToken};
 		const response = await fetch(`${BASE_URL}/api/v1/auth/logout`, {
@@ -99,24 +81,49 @@ export default class PizzaService {
 		}
 	}
 
+	static async refreshToken(refreshToken) {
+		const data = {refreshToken: refreshToken};
+		const response = await fetch(`${BASE_URL}/api/v1/auth/refresh`, {
+			method: 'POST',
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data)
+		})
+
+		console.log(response)
+		if (response.status === 200) {
+			return response.json();
+		} else {
+			console.error(`Nakrilo pizdoi, kapitan: ${response.status}`)
+			return response.status;
+		}
+	}
+
+
+
 	static async tokenInterceptor(fetch) {
 		const tokenExpDate = jwtDecode(localStorage.getItem('authToken')).exp * 1000;
-
 		const isTokenExp = (new Date().getTime() + 60000) > tokenExpDate;
 
 		try {
 			if (isTokenExp) {
 				return await this.refreshToken(localStorage.getItem('authRefreshToken'))
-					.then(({accessToken, refreshToken})  => {
-						localStorage.setItem('authToken', accessToken);
-						localStorage.setItem('authRefreshToken', refreshToken);
-						return fetch();
+					.then((response)  => {
+						if (response.accessToken) {
+							localStorage.setItem('authToken', response?.accessToken);
+							localStorage.setItem('authRefreshToken', response?.refreshToken);
+							return fetch();
+						} else {
+							console.error('В интерцептор вернуло ебаный ответ от сервера: '+ response)
+						}
+
 					})
 			} else {
 				return await fetch();
 			}
 		} catch (e) {
-			console.error('Situacia' + e);
+			console.error('Situacia: ' + e);
 		}
 
 	}
