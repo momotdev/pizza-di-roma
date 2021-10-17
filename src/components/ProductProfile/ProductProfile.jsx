@@ -4,6 +4,7 @@ import PizzaService from "../../API/PizzaService";
 import DefaultButton from "../UI/DefaultButton/DefaultButton";
 import Select from "../UI/Select/Select";
 import noImage from '../../images/noimage.png';
+import Loader from "../UI/Loader/Loader";
 
 const ProductProfile = ({productId, onProductUpdate}) => {
 	const [product, setProduct] = useState({
@@ -17,6 +18,7 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 		"price": "",
 		"active": false
 	});
+	const [isLoading, setIsLoading] = useState(true);
 	const imageForm = React.createRef();
 
 	const fetchProduct = async (id) => {
@@ -37,9 +39,11 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 
 	useEffect(() => {
 		if (productId) {
+			setIsLoading(true);
 			fetchProduct(productId)
 				.then(response => {
 					setProduct(response);
+					setIsLoading(false);
 				})
 		}
 	}, [productId]);
@@ -108,6 +112,7 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 				<form ref={imageForm}>
 					<input onChange={() => handleImageChange()} type="file" name="image"
 						   id="productImage"/>
+					{product.id ? isLoading ? <Loader/> : null : null}
 				</form>
 			</div>
 		</div>
