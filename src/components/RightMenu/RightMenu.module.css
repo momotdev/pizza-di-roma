@@ -18,10 +18,24 @@
     align-items: center;
     padding: 15px 0 15px 50px;
     cursor: pointer;
+    transition: background-color, color .3s;
+}
+
+.menu-item--active {
+    background-color: #61b7a2;
+    color: #ffffff;
+    transition: background-color, color .3s;
+    font-weight: bold;
 }
 
 .menu-item:hover {
     background: rgba(0, 68, 102, .1);
+    transition: background-color .3s;
+}
+
+.menu-item--active:hover {
+    background-color: #02b286;
+    transition: background-color .3s;
 }
 
 .icon {

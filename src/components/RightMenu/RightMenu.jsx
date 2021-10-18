@@ -6,6 +6,7 @@ import productsIcon from '../../images/products.png';
 import ordersIcon from '../../images/box.png';
 import settingsIcon from '../../images/control.png';
 import {Link} from "react-router-dom";
+import {useLocation} from "react-router";
 
 const RightMenu = () => {
 	const menuItems = [
@@ -16,11 +17,14 @@ const RightMenu = () => {
 		{icon: settingsIcon, label: 'Settings', link: ''},
 	]
 
+	const currentPath = useLocation().pathname;
+	const activeStyle = [classes['menu-item'], classes['menu-item--active']];
+
 	return (
 		<div className={classes.menu}>
 			{menuItems.map(item => (
 				<Link key={item.label} to={item.link}>
-					<div className={classes['menu-item']}>
+					<div className={currentPath === item.link ? activeStyle.join(' ') : classes['menu-item']}>
 						<img src={item.icon} className={classes.icon} alt={item.label}/>
 						<div className={classes.label}>{item.label}</div>
 					</div>
