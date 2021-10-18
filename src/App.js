@@ -3,7 +3,9 @@ import './styles/App.css';
 import AppRouter from "./components/AppRouter";
 import {BrowserRouter} from "react-router-dom";
 import {AuthContext} from "./context";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import RightMenu from "./components/RightMenu/RightMenu";
+import Content from "./components/Content/Content";
 
 function App() {
 	const [auth, setAuth] = useState({
@@ -14,7 +16,11 @@ function App() {
 
 	useEffect(() => {
 		if (localStorage.getItem('authToken')) {
-			setAuth((state) => ({...state, authToken: localStorage.getItem('authToken'), authRefreshToken: localStorage.getItem('authRefreshToken')}));
+			setAuth((state) => ({
+				...state,
+				authToken: localStorage.getItem('authToken'),
+				authRefreshToken: localStorage.getItem('authRefreshToken')
+			}));
 		}
 		setIsLoading(false);
 	}, [])
@@ -28,7 +34,15 @@ function App() {
 			<BrowserRouter>
 				<div className="app">
 					<Header/>
-					<AppRouter/>
+					<div className="content-wrapper">
+
+						<RightMenu/>
+						<Content>
+							<AppRouter/>
+						</Content>
+
+					</div>
+
 				</div>
 			</BrowserRouter>
 		</AuthContext.Provider>

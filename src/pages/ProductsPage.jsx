@@ -1,6 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import RightMenu from "../components/RightMenu/RightMenu";
-import Content from "../components/Content/Content";
 import SearchPanel from "../components/SearchPanel/SearchPanel";
 import ProductsList from "../components/ProductsList/ProductsList";
 import Loader from "../components/UI/Loader/Loader";
@@ -58,24 +56,22 @@ const ProductsPage = () => {
 	}
 
 	return (
-		<div className="content-wrapper">
-
-			<RightMenu/>
-			<Content>
-				<SearchPanel sortProducts={sortProducts}/>
-				{products.length
-					? <ProductsList products={sortedProducts} openProduct={openProductProfile}/>
-					: <Loader/>
-				}
-				<AddProductButton onClick={() => setAddModalDisplay(true)}/>
-			</Content>
+		<>
+			<SearchPanel sortProducts={sortProducts}/>
+			{products.length
+				? <ProductsList products={sortedProducts} openProduct={openProductProfile}/>
+				: <Loader/>
+			}
+			<AddProductButton onClick={() => setAddModalDisplay(true)}/>
 			<Modal visibility={modalDisplay} setVisibility={setModalDisplay}>
 				<ProductProfile productId={currentProduct} onProductUpdate={updateProducts}/>
 			</Modal>
 			<Modal visibility={addModalDisplay} setVisibility={setAddModalDisplay}>
 				<ProductProfile onProductUpdate={updateProducts}/>
 			</Modal>
-		</div>
+		</>
+
+
 	);
 };
 

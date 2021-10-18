@@ -108,7 +108,8 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 				</div>
 			</form>
 			<div className={classes['image-form']}>
-				<img src={product.imageUrl} alt={product.name} width={300} height={300} className={classes['profile-image']}/>
+				<img src={product.imageUrl} alt={product.name} width={300} height={300}
+					 className={classes['profile-image']}/>
 				<form ref={imageForm}>
 					<input onChange={() => handleImageChange()} type="file" name="image"
 						   id="productImage"/>
