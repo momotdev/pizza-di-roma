@@ -47,6 +47,16 @@ export default class PizzaService {
 		return await response.json();
 	}
 
+	static async getAllUsers() {
+		const response = await this.tokenInterceptor(() => fetch(`${BASE_URL}/api/v1/users?all=true`, {
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+				"Content-Type": "application/json"
+			},
+		}));
+		return await response.json();
+	}
+
 	static async login(userData) {
 		userData = {...userData, pushToken: ''};
 		const response = await fetch(`${BASE_URL}/api/v1/auth/login`, {
@@ -99,8 +109,6 @@ export default class PizzaService {
 			return response.status;
 		}
 	}
-
-
 
 	static async tokenInterceptor(fetch) {
 		const tokenExpDate = jwtDecode(localStorage.getItem('authToken')).exp * 1000;

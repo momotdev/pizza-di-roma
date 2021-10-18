@@ -1,0 +1,16 @@
+.table {
+    border-spacing: 2px 3px;
+    background: transparent;
+}
+
+.table-header {
+    background: #00aaff;
+    border-radius: 5px;
+}
+
+.table-header th {
+    padding: 5px 10px;
+    user-select: none;
+    border-radius: 5px;
+    font-weight: 700;
+}
