@@ -1,0 +1,84 @@
+.select {
+    display: flex;
+    border: 1px solid #00000050;
+    min-height: 30px;
+    border-radius: 10px;
+    justify-content: space-between;
+    position: relative;
+    background-color: #ffffff;
+    cursor: pointer;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.select--active {}
+
+.arrow-wrapper {
+    display: flex;
+    transform: rotate(0deg);
+    margin-right: 10px;
+    transition: transform .3s;
+    align-items: center;
+}
+
+.select--active .arrow-wrapper {
+    transform: rotate(180deg);
+}
+
+.selected-options-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    flex-wrap: wrap;
+}
+
+.selected-option {
+    display: flex;
+    border: 1px solid #00000050;
+    border-radius: 10px;
+    padding: 1px 7px;
+    margin: 2px 2px;
+    cursor: default;
+    font-size: 16px;
+}
+
+.selected-option-delete {
+    margin-left: 5px;
+    background-color: #ffffff;
+    border-radius: 100%;
+    padding: 0 3px;
+    cursor: pointer;
+    color: red;
+}
+
+.options-wrapper {
+    position: absolute;
+    width: 100%;
+    border: 1px solid #00000050;
+    top: 100%;
+    background-color: #ffffff;
+    display: none;
+}
+
+.select--active .options-wrapper {
+    display: block;
+}
+
+.option {
+    font-size: 16px;
+    padding: 6px 5px;
+    transition: background-color .1s;
+    cursor: pointer;
+}
+
+.option:not(:last-child) {
+    border-bottom: 1px solid #00000030;
+}
+
+.option:hover {
+    background-color: #dedede;
+}
+
+.option, .selected-option {
+    user-select: none;
+}

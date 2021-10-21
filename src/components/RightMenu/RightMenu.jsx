@@ -5,8 +5,7 @@ import usersIcon from '../../images/user.png';
 import productsIcon from '../../images/products.png';
 import ordersIcon from '../../images/box.png';
 import settingsIcon from '../../images/control.png';
-import {Link, NavLink} from "react-router-dom";
-import {useLocation} from "react-router";
+import {NavLink} from "react-router-dom";
 
 const RightMenu = () => {
 	const menuItems = [

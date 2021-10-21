@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import SearchPanel from "../components/SearchPanel/SearchPanel";
 import ProductsList from "../components/ProductsList/ProductsList";
 import Loader from "../components/UI/Loader/Loader";
-import AddProductButton from "../components/AddProductButton/AddProductButton";
+import AddButton from "../components/AddProductButton/AddButton";
 import Modal from "../components/UI/Modal/Modal";
 import ProductProfile from "../components/ProductProfile/ProductProfile";
 import PizzaService from "../API/PizzaService";
@@ -62,7 +62,7 @@ const ProductsPage = () => {
 				? <ProductsList products={sortedProducts} openProduct={openProductProfile}/>
 				: <Loader/>
 			}
-			<AddProductButton onClick={() => setAddModalDisplay(true)}/>
+			<AddButton onClick={() => setAddModalDisplay(true)}/>
 			<Modal visibility={modalDisplay} setVisibility={setModalDisplay}>
 				<ProductProfile productId={currentProduct} onProductUpdate={updateProducts}/>
 			</Modal>

@@ -3,7 +3,7 @@ import classes from './UsersTable.module.css';
 import UserTableItem from "../UserTableItem/UserTableItem";
 import Loader from "../UI/Loader/Loader";
 
-const UsersTable = ({users, isLoading}) => {
+const UsersTable = ({users, isLoading, openUserProfileModal}) => {
 	return (
 		<>
 		<table className={classes.table} >
@@ -20,7 +20,7 @@ const UsersTable = ({users, isLoading}) => {
 				? null
 				: <tbody>
 				{users.map(user => (
-					<UserTableItem key={user.id} user={user}/>
+					<UserTableItem key={user.id} user={user} onClick={() => openUserProfileModal(user.id)}/>
 				))}
 				</tbody>
 			}

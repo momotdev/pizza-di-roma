@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from './UserTableItem.module.css';
 
-const UserTableItem = ({user}) => {
+const UserTableItem = ({user, ...props}) => {
 	return (
-		<tr className={classes['list-item']}>
+		<tr className={classes['list-item']} {...props}>
 			<td className={classes.id}>{user.id}</td>
 			<td>{user.firstName}</td>
 			<td>{user.lastName}</td>
