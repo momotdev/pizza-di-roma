@@ -39,16 +39,8 @@ const UserProfile = ({id}) => {
 	}, [id])
 
 	const onSelectChange = useCallback((value) => {
-		setUser((state) => ({...state, roles: getSelectValues(options, value)}));
-	}, [options]);
-
-	const getSelectLabels = (options, values) => {
-		return options.filter(opt => values.some(o => o === opt.value)).map(opt => opt.label);
-	}
-
-	const getSelectValues = (options, values) => {
-		return options.filter(option => values.some(o => o === option.label)).map(opt => opt.value);
-	}
+		setUser((state) => ({...state, roles: value.filter(option => option.selected).map(option => option.label)}));
+	}, []);
 
 	return (
 		<div className={classes.profile}>
@@ -74,7 +66,7 @@ const UserProfile = ({id}) => {
 							   onChange={event => setUser({...user, password: event.target.value})}
 							   value={user.password ?? ''}/>
 						<label className={classes.label} htmlFor="roles">Roles: </label>
-						<MultiSelect options={options} selectedOpts={getSelectLabels(options, user.roles)} onChange={onSelectChange}/>
+						<MultiSelect options={options} selectedOptions={user.roles} onChange={onSelectChange}/>
 					</div>
 				</div>
 				<div className={classes['description-wrapper']}>

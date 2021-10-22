@@ -35,12 +35,10 @@ function App() {
 				<div className="app">
 					<Header/>
 					<div className="content-wrapper">
-
-						<RightMenu/>
+						{auth.authToken ? <RightMenu/> : null}
 						<Content>
 							<AppRouter/>
 						</Content>
-
 					</div>
 
 				</div>
