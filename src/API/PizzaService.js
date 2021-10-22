@@ -67,6 +67,32 @@ export default class PizzaService {
 		return await response.json();
 	}
 
+	static async updateUser(user) {
+		user = {user};
+		const response = await this.tokenInterceptor(() => fetch(`${BASE_URL}/api/v1/users`, {
+			method: "PUT",
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(user)
+		}));
+		return response.status;
+	}
+
+	static async createUser(user) {
+		user = {user};
+		const response = await this.tokenInterceptor(() => fetch(`${BASE_URL}/api/v1/users`, {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(user)
+		}));
+		return response.status;
+	}
+
 	static async login(userData) {
 		userData = {...userData, pushToken: ''};
 		const response = await fetch(`${BASE_URL}/api/v1/auth/login`, {

@@ -20,6 +20,16 @@ const UsersPage = () => {
 		setUserProfileModal(true);
 	}
 
+	const onUserUpdate = () => {
+		setUserProfileModal(false);
+		setIsLoading(true);
+		fetchUsers()
+			.then(response => {
+				setUsers(response);
+				setIsLoading(false);
+			});
+	}
+
 	useEffect(() => {
 		setIsLoading(true);
 		fetchUsers()
@@ -32,9 +42,12 @@ const UsersPage = () => {
 	return (
 		<>
 			<UsersTable users={users} isLoading={isLoading} openUserProfileModal={showUserProfile}/>
-			<AddButton onClick={() => setUserProfileModal(true)}/>
+			<AddButton onClick={() => {
+				setCurrentUser(null);
+				setUserProfileModal(true);
+			}}/>
 			<Modal visibility={userProfileModal} setVisibility={setUserProfileModal}>
-				<UserProfile id={currentUser}/>
+				<UserProfile id={currentUser} onUserUpdate={onUserUpdate}/>
 			</Modal>
 		</>
 	);

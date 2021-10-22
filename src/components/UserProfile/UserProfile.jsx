@@ -4,7 +4,17 @@ import DefaultButton from "../UI/DefaultButton/DefaultButton";
 import MultiSelect from "../UI/MultiSelect/MultiSelect";
 import PizzaService from "../../API/PizzaService";
 
-const UserProfile = ({id}) => {
+const UserProfile = ({id, onUserUpdate}) => {
+	const USER_MODEL = useMemo(() => ({
+		"id": null,
+		"deviceId": "",
+		"pushToken": "",
+		"firstName": "",
+		"lastName": "",
+		"email": "",
+		"password": "",
+		"roles": []
+	}), []);
 	const [user, setUser] = useState({
 		"id": null,
 		"deviceId": "",
@@ -29,17 +39,27 @@ const UserProfile = ({id}) => {
 		return await PizzaService.getUser(id);
 	}
 
+	const sendUser = async (user) => {
+		if (user.id) {
+			return await PizzaService.updateUser(user);
+		} else {
+			return await PizzaService.createUser(user);
+		}
+	}
+
 	useEffect(() => {
 		if (id) {
 			fetchUser(id)
 				.then(response => {
 					setUser(state => ({...state, ...response}))
 				})
+		} else {
+			setUser(USER_MODEL);
 		}
-	}, [id])
+	}, [id, USER_MODEL])
 
 	const onSelectChange = useCallback((value) => {
-		setUser((state) => ({...state, roles: value.filter(option => option.selected).map(option => option.label)}));
+		setUser((state) => ({...state, roles: value.filter(option => option.selected).map(option => option.value)}));
 	}, []);
 
 	return (
@@ -72,6 +92,8 @@ const UserProfile = ({id}) => {
 				<div className={classes['description-wrapper']}>
 					<DefaultButton onClick={(event) => {
 						event.preventDefault();
+						sendUser(user)
+							.then(_ => onUserUpdate())
 					}}>SAVE</DefaultButton>
 				</div>
 			</form>
