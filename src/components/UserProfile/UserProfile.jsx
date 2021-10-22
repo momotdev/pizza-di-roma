@@ -3,6 +3,7 @@ import classes from './UserProfile.module.css';
 import DefaultButton from "../UI/DefaultButton/DefaultButton";
 import MultiSelect from "../UI/MultiSelect/MultiSelect";
 import PizzaService from "../../API/PizzaService";
+import Loader from "../UI/Loader/Loader";
 
 const UserProfile = ({id, onUserUpdate}) => {
 	const USER_MODEL = useMemo(() => ({
@@ -49,9 +50,11 @@ const UserProfile = ({id, onUserUpdate}) => {
 
 	useEffect(() => {
 		if (id) {
+			setIsLoading(true);
 			fetchUser(id)
 				.then(response => {
-					setUser(state => ({...state, ...response}))
+					setUser(state => ({...state, ...response}));
+					setIsLoading(false);
 				})
 		} else {
 			setUser(USER_MODEL);
@@ -95,6 +98,7 @@ const UserProfile = ({id, onUserUpdate}) => {
 						sendUser(user)
 							.then(_ => onUserUpdate())
 					}}>SAVE</DefaultButton>
+					{isLoading ? <div style={{margin: '0 auto'}}><Loader/></div> : null}
 				</div>
 			</form>
 		</div>
