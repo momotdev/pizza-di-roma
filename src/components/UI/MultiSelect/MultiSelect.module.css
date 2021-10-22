@@ -40,15 +40,19 @@
     margin: 5px 2px;
     cursor: default;
     font-size: 16px;
+    align-items: center;
 }
 
 .selected-option-delete {
     margin-left: 5px;
     background-color: #ffffff;
     border-radius: 100%;
-    padding: 0 3px;
+    padding: 9px 3px;
     cursor: pointer;
-    color: red;
+    color: black;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 0;
 }
 
 .options-wrapper {

@@ -28,10 +28,10 @@ const UserProfile = ({id, onUserUpdate}) => {
 	});
 
 	const options = useMemo(() => [
-		{ value: 'ADMIN', label: 'Admin' },
-		{ value: 'USER', label: 'User' },
-		{ value: 'MANAGER', label: 'Manager' },
-		{ value: 'DELIVERY', label: 'Delivery' }
+		{ value: 'ADMIN', label: 'Admin', badgeColor: '#ff6666'},
+		{ value: 'USER', label: 'User'},
+		{ value: 'MANAGER', label: 'Manager', badgeColor: '#00cc99'},
+		{ value: 'DELIVERY', label: 'Delivery', badgeColor: '#3399ff'}
 	], []);
 
 	const [isLoading, setIsLoading] = useState(true);

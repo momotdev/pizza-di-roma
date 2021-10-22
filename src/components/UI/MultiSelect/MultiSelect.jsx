@@ -60,7 +60,7 @@ const MultiSelect = ({options, selectedOptions, onChange}) => {
 		<div ref={select} className={selectStyle.join(' ')} onClick={toggleOptionsList}>
 			<div className={classes['selected-options-wrapper']}>
 				{innerSelectedOptions.map(option => option.selected
-					? <SelectedOption key={option.value} value={option.label} onDelete={changeOptionSelectedState}/>
+					? <SelectedOption key={option.value} value={option.label} badgeColor={option.badgeColor} onDelete={changeOptionSelectedState}/>
 					: null
 				)}
 			</div>
@@ -80,9 +80,9 @@ const MultiSelect = ({options, selectedOptions, onChange}) => {
 	);
 };
 
-const SelectedOption = ({value, onDelete}) => {
+const SelectedOption = ({value,badgeColor, onDelete}) => {
 	return (
-		<div className={classes['selected-option']}>
+		<div className={classes['selected-option']} style={{backgroundColor: badgeColor ? badgeColor : null}}>
 			<div className={classes['selected-option-label']} onClick={(e) => {
 				e.stopPropagation();
 			}}>{value}</div>
