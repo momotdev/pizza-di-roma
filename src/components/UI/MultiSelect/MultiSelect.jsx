@@ -22,7 +22,7 @@ const MultiSelect = ({options, selectedOptions, onChange}) => {
 
 	const transformSelectedOptionsToObjects = (options, values) => {
 		return options.map(option =>
-			values.some(o => o === option.label)
+			values.some(o => o === option.value)
 				? {...option, selected: true}
 				: {...option, selected: false})
 	}
