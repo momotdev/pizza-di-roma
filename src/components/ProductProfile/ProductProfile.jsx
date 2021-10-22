@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import classes from './ProductProfile.module.css';
 import PizzaService from "../../API/PizzaService";
 import DefaultButton from "../UI/DefaultButton/DefaultButton";
@@ -7,6 +7,17 @@ import noImage from '../../images/noimage.png';
 import Loader from "../UI/Loader/Loader";
 
 const ProductProfile = ({productId, onProductUpdate}) => {
+	const PRODUCT_MODEL = useMemo(() => ({
+		"id": null,
+		"name": "",
+		"description": "",
+		"weight": "",
+		"type": "",
+		"imageId": "",
+		"imageUrl": noImage,
+		"price": "",
+		"active": false
+	}), []);
 	const [product, setProduct] = useState({
 		"id": null,
 		"name": "",
@@ -45,8 +56,10 @@ const ProductProfile = ({productId, onProductUpdate}) => {
 					setProduct(response);
 					setIsLoading(false);
 				})
+		} else {
+			setProduct(PRODUCT_MODEL);
 		}
-	}, [productId]);
+	}, [productId, PRODUCT_MODEL]);
 
 	const sendImageForm = async (form) => {
 		const formData = new FormData(form.current);

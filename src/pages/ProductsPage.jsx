@@ -11,7 +11,6 @@ const ProductsPage = () => {
 	const [currentProduct, setCurrentProduct] = useState(1);
 	const [sortedProducts, setSortedProducts] = useState([]);
 	const [modalDisplay, setModalDisplay] = useState(false);
-	const [addModalDisplay, setAddModalDisplay] = useState(false);
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
@@ -37,7 +36,6 @@ const ProductsPage = () => {
 				setProducts(response);
 				setSortedProducts(response);
 				setModalDisplay(false);
-				setAddModalDisplay(false);
 			});
 	}
 
@@ -62,12 +60,12 @@ const ProductsPage = () => {
 				? <ProductsList products={sortedProducts} openProduct={openProductProfile}/>
 				: <Loader/>
 			}
-			<AddButton onClick={() => setAddModalDisplay(true)}/>
+			<AddButton onClick={() => {
+				setCurrentProduct(null);
+				setModalDisplay(true);
+			}}/>
 			<Modal visibility={modalDisplay} setVisibility={setModalDisplay}>
 				<ProductProfile productId={currentProduct} onProductUpdate={updateProducts}/>
-			</Modal>
-			<Modal visibility={addModalDisplay} setVisibility={setAddModalDisplay}>
-				<ProductProfile onProductUpdate={updateProducts}/>
 			</Modal>
 		</>
 
