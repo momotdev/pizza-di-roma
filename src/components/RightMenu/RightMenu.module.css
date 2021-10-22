@@ -11,6 +11,10 @@
     text-decoration: none !important;
 }
 
+.menu a:active {
+    color: inherit;
+}
+
 .menu-item {
     box-sizing: border-box;
     display: flex;
